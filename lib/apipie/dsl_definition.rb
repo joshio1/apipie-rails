@@ -262,7 +262,7 @@ module Apipie
               if Apipie.configuration.validate_key?
                 params.reject{|k,_| %w[format controller action].include?(k.to_s) }.each_pair do |param, _|
                   # params allowed
-                    _handle_validate_key_error(param) if method_params.select {|_,p| p.name.to_s == param.to_s}.empty?
+                  _apipie_handle_validate_key_error param if method_params.select {|_,p| p.name.to_s == param.to_s}.empty?
                 end
               end
 
@@ -290,7 +290,7 @@ module Apipie
         end
       end
 
-      def _handle_validate_key_error param
+      def _apipie_handle_validate_key_error param
         if Apipie.configuration.raise_error_on_validate_key
           raise UnknownParam, param
         else
