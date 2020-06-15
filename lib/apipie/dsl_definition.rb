@@ -246,7 +246,7 @@ module Apipie
               if Apipie.configuration.validate_presence?
                 method_params.each do |_, param|
                   # check if required parameters are present
-                  raise ParamMissing.new(param) if param.required && !params.has_key?(param.name)
+                  raise ParamMissing, param if param.required && !params.has_key?(param.name)
                 end
               end
 
@@ -262,7 +262,7 @@ module Apipie
               if Apipie.configuration.validate_key?
                 params.reject{|k,_| %w[format controller action].include?(k.to_s) }.each_pair do |param, _|
                   # params allowed
-                  raise UnknownParam.new(param) if method_params.select {|_,p| p.name.to_s == param.to_s}.empty?
+                    _handle_validate_key_error(param) if method_params.select {|_,p| p.name.to_s == param.to_s}.empty?
                 end
               end
 
@@ -289,6 +289,15 @@ module Apipie
 
         end
       end
+
+      def _handle_validate_key_error param
+        if Apipie.configuration.raise_error_on_validate_key
+          raise UnknownParam, param
+        else
+          logger.error(UnknownParam.new(param).to_s)
+        end
+      end
+
 
       def _apipie_save_method_params(method, params)
         @method_params ||= {}

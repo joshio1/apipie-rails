@@ -966,6 +966,9 @@ validate_presence
 validate_key
   Check the received params to ensure they are defined in the API. (false by default)
 
+raise_error_on_validate_key
+  If `validate_key` fails, raise error or log the error. (true by default)
+
 process_params
   Process and extract the parameter defined from the params of the request
   to the api_params variable
