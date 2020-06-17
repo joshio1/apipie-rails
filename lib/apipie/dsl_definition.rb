@@ -265,6 +265,7 @@ module Apipie
                   if method_params.select {|_,p| p.name.to_s == param.to_s}.empty?
                     self.class._apipie_handle_validate_key_error params, param
                   end
+                  logger.error params
                 end
               end
 
