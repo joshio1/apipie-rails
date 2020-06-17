@@ -265,7 +265,6 @@ module Apipie
                   if method_params.select {|_,p| p.name.to_s == param.to_s}.empty?
                     self.class._apipie_handle_validate_key_error params, param
                   end
-                  logger.error params
                 end
               end
 
@@ -297,7 +296,7 @@ module Apipie
         if Apipie.configuration.raise_error_on_validate_key
           raise UnknownParam, param
         else
-          params.delete param
+          params.delete(param)
           logger.error(UnknownParam.new(param).to_s)
         end
       end
