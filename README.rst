@@ -961,13 +961,13 @@ validate_value
   default)
 
 validate_presence
-  Check the params presence against the documentation.
+  Check the params presence against the documentation. (Checks are performed against the `required` keys mentioned in the schema)
 
 validate_key
   Check the received params to ensure they are defined in the API. (false by default)
 
-raise_error_on_validate_key
-  If `validate_key` fails, raise error or log the error. (true by default)
+action_on_non_validated_keys
+  Either `:raise` or `:skip`. If `validate_key` fails, raise error or skip and log the key (`:raise` by default)
 
 process_params
   Process and extract the parameter defined from the params of the request

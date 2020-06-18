@@ -246,7 +246,7 @@ module Apipie
               if Apipie.configuration.validate_presence?
                 method_params.each do |_, param|
                   # check if required parameters are present
-                  raise ParamMissing, param if param.required && !params.has_key?(param.name)
+                  raise ParamMissing.new(param) if param.required && !params.has_key?(param.name)
                 end
               end
 
@@ -293,9 +293,9 @@ module Apipie
       end
 
       def _apipie_handle_validate_key_error params, param
-        if Apipie.configuration.raise_error_on_validate_key
+        if Apipie.configuration.action_on_non_validated_keys == :raise
           raise UnknownParam, param
-        else
+        elsif Apipie.configuration.action_on_non_validated_keys == :skip
           params.delete(param)
           logger.error(UnknownParam.new(param).to_s)
         end
