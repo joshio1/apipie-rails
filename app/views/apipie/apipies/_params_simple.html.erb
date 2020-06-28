@@ -1,0 +1,24 @@
+<ul>
+  <% params.each do |param| %>
+    <% if !param[:show] %>
+      <%= render(:partial => "params_simple", :locals => {:params => param[:params]}) unless param[:params].blank? %>
+      <% next %>
+    <% end %>
+    <li>
+      <span>
+        <b>
+          <a href="#<%= param[:full_name] %>" data-toggle="tooltip" data-placement="top" title="<%= param[:description] ? param[:description] : param[:name] %>">
+            <%= param[:name]%></a></b></span>
+      <%- if param[:required] %>
+        <span style="color: red">* </span>
+      <%- end %>
+      <%- if param[:validator].present? %>
+      <span>: </span>
+      <span style="margin-left: 10px;" ><%= param[:validator].html_safe %></span>
+      <%- end %>
+    </li>
+    <% if param[:params].present? %>
+      <%= render(:partial => "params_simple", :locals => {:params => param[:params]}) unless param[:params].blank? %>
+    <% end %>
+  <% end %>
+</ul>
