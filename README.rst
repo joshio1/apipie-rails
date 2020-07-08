@@ -622,6 +622,36 @@ _______
      # ...
    end
 
+Hash or Array inside a param group
+::::::::::::::::::::::::::::::::::::::::::::::::::::
+
+.. code:: ruby
+
+    param :phones, Array, :required => true, :desc => "Array of phone objects" do
+        param_group :phone_request_schema
+    end
+
+    klazz.def_param_group :phone_request_schema do
+        param :country_id, :number, :desc => "Country id of the channel partner "
+        param :number, String, :desc => "Phone number of the channel partner"
+        param :type, ["primary", "secondary"], :desc => "Type of phone number"
+    end
+
+    #Prefer above syntax over below syntax
+
+    param_group :phone_request_schema
+
+    klazz.def_param_group :phone_request_schema do
+        param :phones, Array, :desc => "Array of phone objects" do
+            param :country_id, :number, :desc => "Country id of the channel partner "
+            param :number, String, :desc => "Phone number of the channel partner"
+            param :type, ["primary", "secondary"], :desc => "Type of phone number"
+        end
+    end
+
+    #This syntax is not preferred because you cannot put a `required` on the entire param_group.
+
+
 
 Embedded response descriptions
 ::::::::::::::::::::::::::::::
