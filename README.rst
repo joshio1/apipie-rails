@@ -1885,9 +1885,9 @@ And if you write one on your own, don't hesitate to share it with us!
 ====================
 
 * Testing changes in the generated output HTML
-    * Go to the spec/dummy folder.
-    * Run `rake apipie-static` to create a static documentation.
-    * Go to the spec/dummy/doc folder to verify your changed output HTML.
+    * Go to the ``spec/dummy`` folder.
+    * Run ``rake apipie-static`` to create a static documentation.
+    * Go to the ``spec/dummy/doc`` folder to verify your changed output HTML.
 
 
 ====================
