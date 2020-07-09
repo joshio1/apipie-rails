@@ -1,10 +1,13 @@
-<ul>
+<ul class="list-group list-group-flush">
   <% params.each do |param| %>
     <% if !param[:show] %>
       <%= render(:partial => "params_simple", :locals => {:params => param[:params]}) unless param[:params].blank? %>
       <% next %>
     <% end %>
-    <li>
+    <li class="list-group-item px-0">
+      <%- if param[:params].present? %>
+        <a class="btn collapsed" data-toggle="collapse" href="#collapseExample1" role="button" aria-expanded="true" aria-controls="collapseExample1"><span class="mr-3"></span></a>
+      <%- end %>
       <span>
         <b>
           <a href="#<%= param[:full_name] %>" data-toggle="tooltip" data-placement="top" title="<%= param[:description] ? param[:description] : param[:name] %>">
@@ -37,7 +40,9 @@
       <%- end %>
     </li>
     <% if param[:params].present? %>
+      <div class="collapse" id="collapseExample1">
       <%= render(:partial => "params_simple", :locals => {:params => param[:params]}) unless param[:params].blank? %>
+      </div>
       <%- if param[:expected_type] == "hash" %>
         <span> } </span>
       <%- elsif param[:expected_type] == "array" %>

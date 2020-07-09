@@ -10,10 +10,10 @@
 
 <div><%= raw @doc[:info] %></div>
 
-<h1 class='page-header'><%= t('apipie.resources') %></h1>
+<h2 class='page-header'><%= t('apipie.resources') %></h2>
 
 <% @doc[:resources].sort_by(&:first).each do |key, api| %>
-  <h2>
+  <h3>
     <a href='<%= api[:doc_url] %><%= @doc[:link_extension] %>'>
       <%= api[:name] %>
     </a>
@@ -22,7 +22,7 @@
     <% end %>
     <br>
     <small><%= api[:short_description] %></small>
-  </h2>
+  </h3>
   <table class='table'>
     <thead>
       <tr>

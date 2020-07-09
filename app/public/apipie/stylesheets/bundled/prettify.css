@@ -28,3 +28,50 @@ ol.linenums li {
   line-height: 18px;
   text-shadow: 0 1px 0 #fff;
 }
+
+/*.btn {*/
+/*  box-shadow: none !important;*/
+/*  outline: 0;*/
+/*}*/
+
+/*a:link,*/
+/*a:visited {*/
+/*  color: #222;*/
+/*}*/
+
+/*a:hover,*/
+/*a:focus {*/
+/*  color: orange;*/
+/*}*/
+
+.list-group-item .mr-3 {
+  border: solid #222;
+  border-width: 0 1px 1px 0;
+  display: inline;
+  cursor: pointer;
+  padding: 3px;
+  position: absolute;
+  left: 0;
+  margin-top: 10px;
+}
+
+.list-group-item{
+  border: 0
+}
+
+.list-group{
+  padding-left: 15px
+}
+
+.list-group-item a.btn.collapsed .mr-3 {
+  transform: rotate(40deg);
+  -webkit-transform: rotate(40deg);
+  transition: .3s transform ease-in-out;
+}
+
+
+.list-group-item a.btn mr-3 {
+  transform: rotate(-140deg);
+  -webkit-transform: rotate(-140deg);
+  transition: .3s transform ease-in-out;
+}
