@@ -17,11 +17,32 @@
       <%- end %>
       <%- if param[:validator].present? %>
         <span>: </span>
-        <span style="margin-left: 10px;"><%= param[:validator].html_safe %></span>
+        <span style="margin-left: 10px;">
+            <% if param[:validator].include? "one of" %>
+              <%= param[:validator].html_safe %>
+            <%- else %>
+              <%- if param[:expected_type] == "hash" %>
+                <span> { </span>
+              <%- elsif param[:expected_type] == "array" %>
+                    <span> [ </span>
+                <%- if param[:expected_type] == "array" && param[:params].blank? %>
+                    <%= param[:validator].html_safe %>
+                    <span> ] </span>
+                <% end %>
+              <%- else %>
+                <%= param[:expected_type].html_safe %>
+              <%- end %>
+            <% end %>
+        </span>
       <%- end %>
     </li>
     <% if param[:params].present? %>
       <%= render(:partial => "params_simple", :locals => {:params => param[:params]}) unless param[:params].blank? %>
+      <%- if param[:expected_type] == "hash" %>
+        <span> } </span>
+      <%- elsif param[:expected_type] == "array" %>
+        <span> ] </span>
+      <%- end %>
     <% end %>
   <% end %>
 </ul>
