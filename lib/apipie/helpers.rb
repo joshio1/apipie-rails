@@ -35,6 +35,7 @@ module Apipie
     def include_javascripts
       %w[ bundled/jquery.js
           bundled/bootstrap-collapse.js
+          bundled/CollapsibleLists.js
           bundled/prettify.js
           apipie.js ].map do |file|
         "<script type='text/javascript' src='#{Apipie.full_url("javascripts/#{file}")}'></script>"

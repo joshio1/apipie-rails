@@ -1,4 +1,4 @@
-<ul>
+<ul class="collapsibleList">
   <% params.each do |param| %>
     <% if !param[:show] %>
       <%= render(:partial => "params_simple", :locals => {:params => param[:params]}) unless param[:params].blank? %>
@@ -7,9 +7,9 @@
     <li>
       <span>
         <b>
-          <a href="#<%= param[:full_name] %>" data-toggle="tooltip" data-placement="top" title="<%= param[:description] ? param[:description] : param[:name] %>">
+<!--          <a href="#<%#= param[:full_name] %>" data-toggle="tooltip" data-placement="top" title="<%#= param[:description] ? param[:description] : param[:name] %>">-->
             <%= param[:name] %>
-          </a>
+<!--          </a>-->
         </b>
       </span>
       <%- if param[:required] %>
@@ -35,14 +35,14 @@
             <% end %>
         </span>
       <%- end %>
+      <% if param[:params].present? %>
+        <%= render(:partial => "params_simple", :locals => {:params => param[:params]}) unless param[:params].blank? %>
+        <%- if param[:expected_type] == "hash" %>
+          <span> } </span>
+        <%- elsif param[:expected_type] == "array" %>
+          <span> ] </span>
+        <%- end %>
+      <% end %>
     </li>
-    <% if param[:params].present? %>
-      <%= render(:partial => "params_simple", :locals => {:params => param[:params]}) unless param[:params].blank? %>
-      <%- if param[:expected_type] == "hash" %>
-        <span> } </span>
-      <%- elsif param[:expected_type] == "array" %>
-        <span> ] </span>
-      <%- end %>
-    <% end %>
   <% end %>
 </ul>

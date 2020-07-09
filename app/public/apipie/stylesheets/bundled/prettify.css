@@ -28,3 +28,18 @@ ol.linenums li {
   line-height: 18px;
   text-shadow: 0 1px 0 #fff;
 }
+
+.collapsibleList li{
+  /*list-style-image : url(/assets/expand.png);*/
+  cursor           : auto;
+}
+
+li.collapsibleListOpen{
+  /*list-style-image : url(/assets/expand.png);*/
+  cursor           : pointer;
+}
+
+li.collapsibleListClosed{
+  /*list-style-image : url(/assets/collapse.png);*/
+  cursor           : pointer;
+}
