@@ -297,7 +297,7 @@ module Apipie
           raise UnknownParam, param
         elsif Apipie.configuration.action_on_non_validated_keys == :skip
           params.delete(param)
-          logger.error(UnknownParam.new(param).to_s)
+          logger.warn(UnknownParam.new(param).to_s)
         end
       end
 
