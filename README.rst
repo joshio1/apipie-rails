@@ -75,6 +75,13 @@ Contributors
 
 See `Contributors page  <https://github.com/Apipie/apipie-rails/graphs/contributors>`_. Special thanks to all of them!
 
+Publishing a new gem version on gem fury.
+------------
+
+* Increment the version number in `lib/apipie/version.rb`
+* Type `gem build apipie-rails.gemspec` to create a new gem file in the apipie-rails-0.5.20 directory.
+* Upload this gem file on gemfury.
+
 License
 -------
 
