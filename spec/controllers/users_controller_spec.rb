@@ -244,6 +244,7 @@ describe UsersController do
                                   :allow_nil => true,
                                   :allow_blank => false,
                                   :metadata => nil,
+                                  :is_array => nil,
                                   :show => true,
                                   :expected_type => "hash",
                                   :validations => [])
