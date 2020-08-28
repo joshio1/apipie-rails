@@ -480,6 +480,8 @@ module Apipie
         if items_type == "Hash"
           ref_name = "#{swagger_op_id_for_path(param_desc.method_description.apis.first.http_method, param_desc.method_description.apis.first.path)}_param_#{param_desc.name}"
           swagger_def[:items] = {"$ref" => gen_referenced_block_from_params_array(ref_name, param_desc.validator.param_description.validator.params_ordered, allow_nulls)}
+        elsif items_type == "Integer"
+          swagger_def[:items] = {type: "number"}
         else
           swagger_def[:items] = {type: "string"}
         end
