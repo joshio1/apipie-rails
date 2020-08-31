@@ -311,6 +311,7 @@ module Apipie
         code = "#{Apipie.configuration.generated_doc_disclaimer}\n"
         code << generate_apis_code(desc[:api])
         code << generate_params_code(desc[:params])
+        code << generate_params_code(desc[:returns])
         code << generate_errors_code(desc[:errors])
         return code
       end

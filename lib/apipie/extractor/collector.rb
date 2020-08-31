@@ -7,7 +7,7 @@ module Apipie
         @api_controllers_paths = Apipie.api_controllers_paths
         @ignored = Apipie.configuration.ignored_by_recorder
         @descriptions = Hash.new do |h, k|
-          h[k] = {:params => {}, :errors => Set.new}
+          h[k] = {:params => {}, :errors => Set.new, returns: {}}
         end
         @records = Hash.new { |h,k| h[k] = [] }
       end
@@ -44,6 +44,7 @@ module Apipie
 
         refine_errors_description(description, record)
         refine_params_description(description[:params], record[:params])
+        refine_params_description(description[:returns], record[:response_data])
       end
 
       def refine_errors_description(description, record)
