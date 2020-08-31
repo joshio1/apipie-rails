@@ -311,7 +311,7 @@ module Apipie
         code = "#{Apipie.configuration.generated_doc_disclaimer}\n"
         code << generate_apis_code(desc[:api])
         code << generate_params_code(desc[:params])
-        code << generate_params_code(desc[:returns])
+        code << generate_returns_code(desc[:returns])
         code << generate_errors_code(desc[:errors])
         return code
       end
@@ -334,6 +334,13 @@ module Apipie
           code << "\n"
         end
         return code
+      end
+
+      def generate_returns_code(return_params)
+        code = "returns code: 200 do\n"
+        code << generate_params_code(return_params, "  ")
+        code << "end\n"
+        code
       end
 
       def generate_params_code(params, indent = "")

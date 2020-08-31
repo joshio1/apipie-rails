@@ -1,3 +1,4 @@
+
 module Apipie
   module Extractor
     class Collector
@@ -64,27 +65,37 @@ module Apipie
             # we specify what type it might be. At the end the first type
             # that left is taken as the more general one
             unless param_desc[:type]
-              param_desc[:type] = [:bool, :boolean, :number]
+              param_desc[:type] = [:boolean, :number]
               param_desc[:type] << Hash if value.is_a? Hash
-              param_desc[:type] << :undef
+              param_desc[:type] << Array
+              param_desc[:type] << String
             end
 
-            if [:boolean, :bool].include?(param_desc[:type].first) && (! [true, false, 1, 0].include?(value))
+            if [:boolean, :bool].include?(param_desc[:type].first) && (! [true, false].include?(value))
               param_desc[:type].shift
             end
 
-            if param_desc[:type].first == :number && (key.to_s !~ /id$/ || !Apipie::Validator::NumberValidator.validate(value))
+            if param_desc[:type].first == :number && !Apipie::Validator::NumberValidator.validate(value)
               param_desc[:type].shift
             end
 
-            if param_desc[:type].first == :decimal && (key.to_s !~ /id$/ || !Apipie::Validator::DecimalValidator.validate(value))
+            if param_desc[:type].first == Array && !value.kind_of?(Array)
               param_desc[:type].shift
             end
+
+            if param_desc[:type].first == :decimal && !Apipie::Validator::DecimalValidator.validate(value)
+              param_desc[:type].shift
+            end
+
           end
 
-          if value.is_a? Hash
+          if (value.is_a? Hash)
             param_desc[:nested] ||= {}
             refine_params_description(param_desc[:nested], value)
+          end
+          if (value.is_a? Array) && (value.first.is_a? Hash)
+            param_desc[:nested] ||= {}
+            refine_params_description(param_desc[:nested], value.first)
           end
         end
       end
